@@ -10,9 +10,10 @@ function App() {
   const link = usernameText == null || usernameText == '' ? 'http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username=baconhairnormal' : 'http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&Format=Png&username='+name;
   const href = usernameText == null || usernameText == '' ? '#' : 'https://www.roblox.com/search/users?keyword='+name;
   const [food, setFood] = useState();
+  const [scale, setScale] = useState(false);
   const [value, setValue] = useState(1);
   const minRobux = 1;
-  const maxRobux = 1000000;
+  const maxRobux = 1000;
 
   const variants1 = {
     initial: { width: '0%' },
@@ -33,8 +34,19 @@ function App() {
 
   }
 
+  const variants4 = {
+    visible: {
+      scale: scale === true ? 1.1 : 1
+    }
+  }
+
   function setButton () {
     setWasButtonClicked(true);
+    setScale(true);
+
+    setTimeout(()=>{
+      setScale(false);
+    }, 200);
   }
 
   function changeUsername (e) {
@@ -67,7 +79,7 @@ function App() {
           <p className="robux-amount-text" >{value}</p>
           <img className="robux-icon" src="https://www.seekpng.com/png/full/64-640936_roblox-hack-generator-roblox-robux-logo.png" />
         </div>
-        <button onClick={setButton} >Give Robux</button>
+        <motion.button initial="initial" animate="visible" variants={variants4} onClick={setButton} >Give Robux</motion.button>
 
         <motion.div 
         initial="initial"
